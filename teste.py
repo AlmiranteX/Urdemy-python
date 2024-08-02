@@ -5,5 +5,5 @@ jon = input("nome ?")
 
 if jon == 'jon':
     print("ola jonatas")
-elif:
+else:
     print('Ola')
