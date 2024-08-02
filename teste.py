@@ -4,6 +4,7 @@ print("testando repositorio!")
 jon = input("nome ?")
 
 if jon == 'jon':
-    print("ola jonatas")
+    print("ola jonatas araujo de aquino")
 else:
-    print('Ola')
+    print('Ola '+ jon)
+    
