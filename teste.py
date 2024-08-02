@@ -1,5 +1,5 @@
 import os
-os.system('ola mundo')
+os.system('clear')
 print("testando repositorio!")
 jon = input("nome ?")
 
