@@ -1,3 +1,3 @@
-numero = range(0, 50)
+numero = range(50)
 
 print(numero)
