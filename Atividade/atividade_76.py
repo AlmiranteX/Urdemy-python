@@ -2,6 +2,8 @@
 Atividades do jogo da palavra secreta!
 """
 
+
+
 import os
 def deleta():
     os.system('clear')
