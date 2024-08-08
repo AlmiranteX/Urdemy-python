@@ -2,8 +2,6 @@ import os
 os.system('clear')
 
 
-
-
 lista =  ['jonatas', 'araujo', 'aquino']
 
 def editList(e, n, t):
@@ -34,10 +32,3 @@ def editList(e, n, t):
 lista[1] = editList(lista[1], 2, "w")
 
 print(lista)
-
-
-
-
-
-
-
