@@ -7,26 +7,31 @@ os.system('clear')
 lista =  ['jonatas', 'araujo', 'aquino']
 
 def editList(e, n, t):
-    size_text = len(e)
-    text = ""
 
-    for i in range(size_text):
-       
-        if i == n:
-            text += t
-            i += 1
-            continue
+    if type(n) == int:
 
-        else:
-            text += e[i]
-        i += 1
-    
-    return text
+        size_text = len(e)
+        text = ""
+
+        for i in range(size_text):
+                
+            if i == n:
+                text += t
+                i += 1
+                continue
+
+            else:
+                text += e[i]
+                i += 1
+                
+        return text
+            
+    else:
+        print('\nA Referencia esta incorreta ex: lista[1] = editList(lista[1], 2, "texto") ')
+        exit()
         
 
-lista[2] = editList(lista[2], 2, '0')
-
-
+lista[1] = editList(lista[1], 2, "w")
 
 print(lista)
 
