@@ -22,43 +22,48 @@ def adicionar_iten():
         else:
             print(aviso)
             aviso = None
-        
-        iten = input('\nAdicionar iten a lista de compras\n\nNome do iten: ') or None
+       
+        while iten != 'sair':
 
-        #verificar se foi nada foi digitado ou digito digitado.
-        if iten == None:
-                aviso = '[Erro], Nada digitado!'
+            iten = input('\nAdicionar iten a lista de compras\n\nNome do iten ou (sair) : ') or None
+
+            #verificar se foi nada foi digitado ou digito digitado.
+            if iten == None:
+                    aviso = '[Erro], Nada digitado!'
+                    adicionar_iten()
+            elif iten != None:
+                    for i in range(len(iten)):
+                        if iten[i].isdigit():
+                        
+                            aviso = '[Erro],proibido Nome com digito'
+                            adicionar_iten()
+                            
+                #verificar se o nome tem o tamanho adequado
+            
+            #verificar se o nome tem o tamanho adequado.
+            if len(iten) < 3:    
+                aviso = 'O nome digitado e muito curto'
                 adicionar_iten()
-        elif iten != None:
-                for i in range(len(iten)):
-                    if iten[i].isdigit():
-                    
-                        aviso = '[Erro],proibido Nome com digito'
-                        adicionar_iten()
-                           
-            #verificar se o nome tem o tamanho adequado
-        
-        #verificar se o nome tem o tamanho adequado.
-        if len(iten) < 3:    
-            aviso = 'O nome digitado e muito curto'
-            adicionar_iten()
-        elif len(iten) > 15:
-                aviso = 'O nome digitado e muito longo'
+            elif len(iten) > 15:
+                    aviso = 'O nome digitado e muito longo'
+                    adicionar_iten()
+
+            #verificar se o iten ja existir na lista
+            if iten in compras:
+                aviso = 'Este iten ja esta em sua lista !'
                 adicionar_iten()
 
-        #verificar se o iten ja existir na lista
-        if iten in compras:
-            aviso = 'Este iten ja esta em sua lista !'
-            adicionar_iten()
+            #sair
+            if iten == 'sair':
+                menu()
 
-        #Nome valido adicionar a lista de compras
-        else:
-            os.system('clear')
-            compras.append(iten)
-            print('Iten adicionado com sucesso!')
-
-            time.sleep(2)
-            menu() 
+            #Nome valido adicionar a lista de compras
+            else:
+                os.system('clear')
+                compras.append(iten) 
+                print(f'({iten}) adicionado\n{len(compras)} itens em sua lista')
+            
+            
                 
 
 def menu():
