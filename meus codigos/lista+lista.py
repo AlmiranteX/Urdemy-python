@@ -2,4 +2,4 @@ dados = [['jonatas', 'araujo', 27],['junio', 'elielson', 25],['jefinho', 'silva'
 
 print(dados)
 dados.append(['pinto', 'silva'])
-print(dados[1])
+print(dados)
