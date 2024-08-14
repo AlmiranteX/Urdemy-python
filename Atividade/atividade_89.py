@@ -55,26 +55,32 @@ def adicionar_iten():
 
             #sair
             if iten == 'sair':
-                menu()
+                break
 
             #Nome valido adicionar a lista de compras
             else:
                 os.system('clear')
                 compras.append(iten) 
                 print(f'({iten}) adicionado\n{len(compras)} itens em sua lista')
+        menu()
+
 # Função apaga itens da Lista de compras.
 def apaga_itens():
     os.system('clear')
     print('-- Apaga itens da lista de compras --\n\n-- Digite [S] para voltar --\n')
     escolha = None
 
+    
     for indice, nome in enumerate(compras):
         print(indice, nome)
 
     while escolha != 's':
         
         if len(compras) <= 0:
-            menu()
+            break
+            
+            
+
 
         escolha = input('\nDigite o indice do item a ser apagado ') or None
         qtd_itens = len(compras)
@@ -108,6 +114,7 @@ def apaga_itens():
                 print('Digite um indice correspondente ao item !')
                 time.sleep(2)
                 apaga_itens()
+    menu()           
 # Função Editar item da Lista de compras.    
 def edita_itens():
     global aviso, iten, compras
@@ -143,6 +150,9 @@ def edita_itens():
 
             iten = input('\nEditar: ') or None
 
+            if iten == 's':
+                break
+
             #verificar se foi nada foi digitado ou digito digitado.
             if iten == None:
                     aviso = '[Erro], Nada digitado!\n'
@@ -176,7 +186,7 @@ def edita_itens():
                 aviso = ''
                 compras[escolha] = iten
                 edita_itens()
-            
+        edita_itens()   
 
     except:
         #sair
@@ -198,10 +208,11 @@ def menu():
     print("[0] Lista itens")
     print("[1] Adicionar itens")
     print("[2] Apaga itens")
-    print("[3] Editar itens\n") 
-
+    print("[3] Editar itens") 
+    print("[4] Sair\n")
     escolha =  input("Digite o N° da opção para selecionala: ") or None
-
+    
+    
     #Selecionado [0] Lista compras.
     if escolha == '0':
 
@@ -241,6 +252,38 @@ def menu():
             print('Nada para Editar, Lista vazia')
             time.sleep(2)
             menu()
+
+
+
+    #Selecionado [4] sair
+    if escolha == '4':
+        sair = escolha
+        
+    while sair == '4':
+   
+  
+        if len(compras) > 0:
+            os.system('clear')
+            print(f'{len(compras)} itens na lista\n')
+
+            for indice, nome in enumerate(compras):
+                print(indice, nome)
+            print('\n Fim da execução do programa !\n')
+            time.sleep(1)
+            exit()
+            
+            
+        elif len(compras) == 0:
+            os.system('clear')
+            print(f'Lista Vazia !\n\nFim da execução do programa !\n')
+            time.sleep(1)
+            exit()
+
+            
+
+    #se nada digitado
+    if escolha == None:
+        menu()
 
 
     return escolha
