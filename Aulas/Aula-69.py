@@ -24,12 +24,12 @@ while i < len(String):
 if win:
         
     la = str(letra_a)
-    texto = " O texto " + String + " contem a letra (a) "
+    texto = " O texto (" + String + ") contem a letra (a) "
     print(texto + la + " vezes!" )
 
 else:
 
     la = str(letra_a)
-    texto = "O texto " + String + " Não contem a letra (a)  "
+    texto = "O texto (" + String + ") Não contem a letra (a)  "
     print(texto)
 
