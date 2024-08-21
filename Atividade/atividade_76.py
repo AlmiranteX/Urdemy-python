@@ -83,3 +83,7 @@ while i in range(1, 32):
         print(alerta)
         exit()
     cabeca()
+
+
+
+
