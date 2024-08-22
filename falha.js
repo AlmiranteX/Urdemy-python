@@ -4,7 +4,6 @@ clear()
 
 setInterval(() => {
 
-    
         try {
             
             qtd_elementos = document.querySelectorAll('div#sweepstakes-list')[0].childElementCount
@@ -16,34 +15,16 @@ setInterval(() => {
                 } catch (error) {
                     
                     //okbb
-        
+                    clear()
                     console.log('Erro ao participar')
-                    
+   
                 }
             
             }
             
-            
-
-            
-        } catch (error) {
-            
-            console.log('erro ao entra em gratuitos')
-        }
-       
-}, 100000);
-
-setInterval(() => {
-    try {
-        document.querySelectorAll('a')[1].click()
-    } catch (error) {
-        //ok
-    }
-    setInterval(() => {
-        try {
-            document.querySelectorAll('a')[6].click()
         } catch (error) {
             //ok
         }
-    }, 80000);
-}, 80000);
+       
+}, 190000);
+
