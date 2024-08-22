@@ -23,7 +23,7 @@ setInterval(() => {
             }
             
         } catch (error) {
-            // jonatas
+            // jonata
         }
        
 }, 190000);
