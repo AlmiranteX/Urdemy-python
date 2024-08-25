@@ -1,0 +1,14 @@
+{
+    "name": "AutoBloi308",
+    "description": "AutoBloi308 é uma ferramenta para participar dos sorteios automaticamente.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": ["activeTab", "scripting"],
+    "action":{
+        "default_poup": "index.html"
+    }
+
+
+
+
+}
