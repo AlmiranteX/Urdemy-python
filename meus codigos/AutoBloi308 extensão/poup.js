@@ -9,7 +9,14 @@ var maquina = true
 var modo = true
 
 
+setInterval(() => {
+  chrome.storage.local.get(['Numero'], function(result){
+    
+    numero.value = result
 
+    console.log("resgatando o valor armazendado")
+  })
+}, 1000);
 
 
 
