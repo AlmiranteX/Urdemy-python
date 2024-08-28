@@ -74,6 +74,12 @@ sav_edit.addEventListener('click', async () => {
     sav_edit.style.backgroundColor = `rgb(238, 241, 6)`;
     numero.disabled = true;
     
+    //armazena valor do numero localmente
+    chrome.storage.local.set({'Numero': `${numero.value}`}, function(){
+        console.log('Valor armazendado com sucesso!')
+
+    })
+    
 
   // Editar valor
   }else if (n == 'Editar'){
