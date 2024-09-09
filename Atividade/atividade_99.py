@@ -1,3 +1,4 @@
+#atividade gerar cpf valido
 cpf = ''
 digitar = ''
 import os, random
