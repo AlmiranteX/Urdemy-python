@@ -13,3 +13,15 @@ def idade(*idade):
 ano = idade(nasceu, atual)
 
 print(f"Com idade: {ano}")
+
+
+casa = [0, 1, 2]
+
+def ca(*resta):
+    return resta[0][1] + 7
+    
+
+casa.append(ca(casa))
+
+print(casa)
+    
