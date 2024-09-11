@@ -42,7 +42,12 @@ def quest_alphabet(alpha, speak, f, t):
     win, loss = 0, 0
     lossed = []
     i = 0
+    
     for letter in alpha:
+        menu(\
+            f=f, t=t,\
+            w=win, l=loss, h=lossed
+        )
         
         L = input(f'how speak the letter ({letter}) ?')
         
@@ -56,10 +61,7 @@ def quest_alphabet(alpha, speak, f, t):
         i+=1
         print(lossed)
             
-        menu(\
-            f=f, t=t,\
-            w=win, l=loss, h=lossed
-        )
+        
         
                       
 quest_alphabet(\
