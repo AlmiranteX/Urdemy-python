@@ -20,11 +20,7 @@ fonologia = 'Fonologia\n O alfabeto em inglês é formado por cinco vogais e 21 
 
 def menu(f, t, w, l, h):
     
-    
-    
-    
     os.system('cls')
-    
     
     print(t, '\n\n' ,f, end='\n'*3)
     
@@ -65,7 +61,6 @@ def quest_alphabet(alpha, speak, f, t):
         
                       
 quest_alphabet(\
-    
     alpha=alphabet, speak=speak_aphabet, \
     t=titulo, f=fonologia
 )
