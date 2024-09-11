@@ -12,7 +12,8 @@ def multiplicar(*numeros):
 
     for i in numeros:
         n *= i
-        print(n)
+        pi = "par" if n % 2 == 0 else "impa"
+        print(f'{n}--{pi}')
 
     v = ("par")if int(n) % 2 == 0 else "impar"
     
@@ -20,4 +21,3 @@ def multiplicar(*numeros):
     
 resul = multiplicar(*num)
 
-print(*resul)
