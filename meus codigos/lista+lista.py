@@ -25,7 +25,7 @@ while on_of:
    
    
     
-    
+    #
     for i in range(len(dados)):
         if login == dados[i][0]:
             password = input('Senha:\n\t') or None
