@@ -21,14 +21,14 @@ while on_of:
     
     login = input('Login:\n\t') or None
    
-    
+    password = input('Senha:\n\t') or None
    
    
     
     #
     for i in range(len(dados)):
         if login == dados[i][0]:
-            password = input('Senha:\n\t') or None
+           
             
             if password == dados[i][1]:
                 os.system('cls')
@@ -41,17 +41,17 @@ while on_of:
                 print('Senha Incorreta\n')
                 print(f'Login:\n\t{login}\n')
                 password = input('Senha:\n\t') or None
-                continue
+        
                 
 
                 
 
                 
-        if login != dados[i][0] and password == None:
+        elif login != dados[i][0] and password == None:
             print('Login Nao existir', end="\r")
-            login = None
             time.sleep(1)
-            continue
+    
+            
             
             
         
