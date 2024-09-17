@@ -1,8 +1,8 @@
 # Importaçoes do kivy
 import kivy
-from kivy.app import *
-from kivy.uix.boxlayout import *
-from kivy.uix.button import *
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
 
 
 class FirstLayout(BoxLayout):
