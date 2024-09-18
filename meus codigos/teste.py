@@ -1,21 +1,26 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+"""
+List:
+    metodo wrapper.
+    Caso queria criar uma list Numerica e possivel usar um for com um range() dentro para adcionar numeros na lista.
+    caso o numero adicionado a lista precise ser do type string e possivel converte no momento da adção do numero na lista.
+Clousures:
+    funçoes que retornan uma função.
+    
+"""
+def saudar(nome=''):
+    def funcao():
+        return f'Bom dia! {nome}'
+    return funcao()
 
-# Inicializando o driver
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
 
-# Acessando o Google
-driver.get("https://www.google.com")
 
-# Encontrando a caixa de pesquisa e realizando uma ação
-search_box = driver.find_element(by=By.NAME, value="q")
-search_box.send_keys("Asimov Academy")
-search_box.submit()
+print(saudar('jonatas').title(), 'araujo')
+i = 1
 
-# Fechando o navegador
-driver.quit()
+pizza3 = [str(i) for i in range(3, 37, 3)]
+pizza2 = [str(i) for i in range(2, 36, 3)]
+pizza1 = [str(i) for i in range(1, 35, 3)]
 
-##
+print(
+    pizza3, '\n', pizza2, '\n', pizza1
+)
