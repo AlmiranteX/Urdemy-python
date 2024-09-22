@@ -1,0 +1,65 @@
+<SimpleLayout>:
+    orientation: 'vertical'
+    
+    cols: 1
+    rows: 8
+    Label:
+        text: '1'
+    Label:
+        id: my_label
+        text: 'Vazio'
+    Label:
+        text: '2'
+    Label:
+        text: '3'
+    Label:
+        text: '4'
+    Label:
+        text: '5'
+    Label:
+        text: '6'
+    
+  
+       
+    
+    GridLayout:
+        cols: 5
+        rows: 2
+        size_hint: None,None
+        size: 200,50
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+
+
+        Button:
+            background_normal: ''
+            background_color: 'green'
+           
+
+            id: btn_1
+            text: 'btn-1'
+            #size_hint: None,None
+            size: 50, 25
+            on_press: root.on_BTN_1()
+           
+                
+
+        Button:
+            id: btn_2
+            text: 'btn-2'
+            #size_hint: None,None
+            size: 50, 25
+            on_press: root.on_BTN_2()
+
+        Button:
+            id: btn_3
+            text: 'btn-3'
+            #size_hint: None,None
+            size: 50, 25
+            on_press: root.on_BTN_3()
+
+        Button:
+            id: btn_4
+            text: 'btn-4'
+            #size_hint: None,None
+            size: 50, 25
+            on_press: root.on_BTN_4()
