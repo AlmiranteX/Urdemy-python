@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.config import Config
 from kivy.clock import Clock
+import random, os
 
 
 # Define o tamanho da janela antes de carregar o App
@@ -38,27 +39,63 @@ class SimpleApp(App):
     def build(self):
         return SimpleLayout()
     
-def color(self, bt):
-    if bt== 'btn_1':
-        self.ids.btn_1.background_color= 'green'
-    if bt == 'btn_2':
-        self.ids.btn_2.background_color= 'green'
-    if bt == 'btn_3':
-        self.ids.btn_3.background_color= 'green'
-    if bt == 'btn_4':
-        self.ids.btn_4.background_color= 'green'
+        
     
-    if bt == 'gray':
-        self.ids.btn_1.background_color= 'gray'
-        self.ids.btn_2.background_color= 'gray'
-        self.ids.btn_3.background_color= 'gray'
-        self.ids.btn_4.background_color= 'gray'
-           
+def color(self, bt, L, click):
+    
+    self.ids.btns.disabled = True
+    i=2
+    i += alphabet(L, click)[1]
+    
+    self.ids.alphabet_English.text = f'English alphabet {i}/26' 
+    
+    
+def colo_gray(self):
+    os.system('cls')
+    click_letter = self.ids.btn_1.text
+    letter = self.ids.letter.text
+        
+    test = alphabet(L=letter, click=click_letter)
+    win, indice, letra, fala = test[0], test[1], test[2], test[3]
+        
+    print(indice, len(fala))
+
+    if letra == 'z':
+        os.system('cls')
+        print('Fim do programa...')
+    else:
+        self.ids.letter.text = letra[indice+1]
+    
+        
+    self.ids.btns.disabled = False
+        
+    #sortear fala nos btns
+    n = random.randint(0, 3)
+    if n == 0:
+        self.ids.btn_1.text = fala[indice+1]
+        self.ids.btn_2.text =  fala[random.randint(0, 25)]
+        self.ids.btn_3.text =  fala[random.randint(0, 25)]
+        self.ids.btn_4.text = fala[ random.randint(0, 25)]   
+    elif n == 1:
+        self.ids.btn_2.text = fala[indice+1]
+        self.ids.btn_1.text =  fala[random.randint(0, 25)]
+        self.ids.btn_3.text =  fala[random.randint(0, 25)]
+        self.ids.btn_4.text =  fala[random.randint(0, 25)]
+    elif n == 2:
+        self.ids.btn_3.text =  fala[indice+1]
+        self.ids.btn_2.text =  fala[random.randint(0, 25)]
+        self.ids.btn_1.text =  fala[random.randint(0, 25)]
+        self.ids.btn_4.text =  fala[random.randint(0, 25)]
+    elif n == 3:
+        self.ids.btn_4.text = fala[indice+1]
+        self.ids.btn_2.text = fala[random.randint(0, 25)]
+        self.ids.btn_3.text =  fala[random.randint(0, 25)]
+        self.ids.btn_1.text =  fala[random.randint(0, 25)]
+            
           
 # Define the layout class
 class SimpleLayout(BoxLayout):
-   
- 
+  
     def on_BTN_1(self):
         """Sumary:
             1-salva txt do btn_1 na var clcik_letter
@@ -72,13 +109,17 @@ class SimpleLayout(BoxLayout):
         
         test = alphabet(L=letter, click=click_letter)
         win, indice, letra, fala = test[0], test[1], test[2], test[3]
-        
+    
         if win == True:
             
+            color(self, bt='btn_1', L=letter, click=click_letter)
+            if letter == 'z':
+                print('ganhor')
+            else:
+                colo_gray(self)
             
-            color(self, bt='btn_1')
-            Clock.schedule_once(self.colo_gray, 1)
     def on_BTN_2(self):
+        print('ok')
         click_letter = self.ids.btn_2.text
         letter = self.ids.letter.text
         
@@ -86,11 +127,11 @@ class SimpleLayout(BoxLayout):
         win, indice, letra, fala = test[0], test[1], test[2], test[3]
         
         if win == True:
+            color(self, bt='btn_2', L=letter, click=click_letter)
+            colo_gray(self)
             
-            
-            color(self, bt='btn_2')
-            Clock.schedule_once(self.colo_gray, 1)
     def on_BTN_3(self):
+        print('ok')
         click_letter = self.ids.btn_3.text
         letter = self.ids.letter.text
         
@@ -98,11 +139,12 @@ class SimpleLayout(BoxLayout):
         win, indice, letra, fala = test[0], test[1], test[2], test[3]
         
         if win == True:
+        
+            color(self, bt='btn_3', L=letter, click=click_letter)
+            colo_gray(self)
             
-            
-            color(self, bt='btn_3')
-            Clock.schedule_once(self.colo_gray, 1)
     def on_BTN_4(self):
+        print('ok')
         click_letter = self.ids.btn_4.text
         letter = self.ids.letter.text
         
@@ -110,20 +152,13 @@ class SimpleLayout(BoxLayout):
         win, indice, letra, fala = test[0], test[1], test[2], test[3]
         
         if win == True:
+           
+            color(self, bt='btn_4', L=letter, click=click_letter)
+            colo_gray(self)
+    
             
-            color(self, bt='btn_4')
-            Clock.schedule_once(self.colo_gray, 1)   
-               
-    def colo_gray(self, dt):
-        click_letter = self.ids.btn_1.text
-        letter = self.ids.letter.text
+      
         
-        test = alphabet(L=letter, click=click_letter)
-        win, indice, letra, fala = test[0], test[1], test[2], test[3]
-        
-        color(self, bt='gray')
-        self.ids.letter.text = letra[indice+1]
-
     
 # Run the application
 if __name__ == "__main__":
