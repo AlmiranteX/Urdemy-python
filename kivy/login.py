@@ -5,6 +5,7 @@ users ={
         'sexo': 'M',
         'fihos': 1,
         'casado': 'sim',
+        'gmail': 'araujojonatasapc152018@gmail.com',
     },
     'jennifer': {
         'password': 20042024,
