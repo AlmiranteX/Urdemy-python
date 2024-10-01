@@ -74,8 +74,6 @@ def login(L, S, contas, av_u, av_s):
         return False
 
 def registro(inputs, avisos):
-
-
     #teste compatibilidade
     def yes_no(campo, aviso, qt_carct, yes):
         
@@ -90,6 +88,7 @@ def registro(inputs, avisos):
             for caractere in texto:
                 if caractere not in yes:
                     aviso.text = 'Invalide!'
+                    campo.background_color = 'ffbdbd'
                     none_av(aviso, t=3)
                     return False
                 #controlar uso de espaços
@@ -97,18 +96,21 @@ def registro(inputs, avisos):
                     n+=1
                     if n > 2:
                         aviso.text = 'Invalide!'
+                        campo.background_color = 'ffbdbd'
                         none_av(aviso, t=3)
                         n=0
                         return False
                 else:
                     continue
-                
+            campo.background_color = 255, 255, 255, 255
             return True
         
         else:
             aviso.text = 'Invalide!'
+            campo.background_color = 'ffbdbd'
             none_av(aviso, t=3)
-            
+    
+    #chama yes_no() passando o campo e valores   
     def dados():       
         usuario = yes_no(
             campo=inputs['R_user'],
@@ -146,7 +148,8 @@ def registro(inputs, avisos):
             qt_carct=(3, 4),
             yes='0123456789'
             )
-        
+    
+    return dados()
 
 class Screen_Login(Screen):
      #Entrar:
