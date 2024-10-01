@@ -1,6 +1,5 @@
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
-#from kivy.uix.boxlayout import BoxLayout
 from kivy.config import Config
 from kivy.clock import Clock
 import random, os
@@ -44,7 +43,6 @@ def login(L, S, contas):
         aviso = f'Usuario "{L}" Não Existe!'
         return False, aviso
 
-
 class Screen_Login(Screen):
      #Entrar:
     def bt_enter(self):
@@ -61,6 +59,7 @@ class Screen_Login(Screen):
     
     def bt_registrar(self):
         self.manager.current = 'Screen_Registre'
+        
 class Screen_Registre(Screen):
     
     def Back_Login(self):
@@ -69,13 +68,10 @@ class Screen_Registre(Screen):
 class GerenciadorDeTelas(ScreenManager):
     pass
 
-
-
 class Save_App(App):
     def build(self):
         return GerenciadorDeTelas()
     
-
 # Run the application
 if __name__ == "__main__":
     Save_App().run()
