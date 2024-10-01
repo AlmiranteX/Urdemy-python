@@ -2,11 +2,10 @@
     Screen_Login:
     Screen_Registre:
 
+#Tela de Login
 <Screen_Login>:
     name: 'Screen_Login'
-    couls: 1
-    rows: 1
-    orientation: 'vertical'
+
     FloatLayout:
         
         Label:
@@ -22,6 +21,13 @@
             size_hint: None, None
             size_hint: 0.5,0.005
             pos_hint: {"center_x": 0.33, "center_y": 0.7}
+        #aviso de usuario
+        Label:
+            id: aviso_user
+            color: 'red'
+            size_hint: None, None
+            size_hint: 0.5,0.005
+            pos_hint: {'center_x': 0.6, 'center_y': 0.7}
         TextInput:
             id: user
             size_hint: None, None
@@ -35,6 +41,13 @@
             size_hint: None, None
             size_hint: 0.5,0.005
             pos_hint: {"center_x": 0.32, "center_y": 0.58}
+        #aviso de senha
+        Label:
+            id: aviso_senha
+            color: 'red'
+            size_hint: None, None
+            size_hint: 0.5,0.005
+            pos_hint: {'center_x': 0.6, 'center_y': 0.58}
         TextInput:
             id: password
             size_hint: None, None
@@ -65,14 +78,150 @@
             on_press: root.bt_registrar()
 
 
-
+#Tela de Registro
 <Screen_Registre>:
     name: 'Screen_Registre'
-    Label:
-        text:'REgistrar Contas'
-    Button:
-        id: bt_back
-        text:'Voltar'
-        on_press: root.Back_Login()
+    FloatLayout:
+        
+        Label:
+            text:'Registrar Conta'
+            size_hint: None, None
+            size_hint: 1,0.0004
+            pos_hint: {"center_x": 0.5, "center_y": 0.9}
+        #usuario
+        Label:
+            text:'Usuario:'
+            size_hint: None, None
+            size_hint: 0.65,0.005
+            pos_hint: {'center_x:': 0.5, 'center_y': 0.8}
+        Label:
+            id: av_R_user 
+            text:''
+            color: 'red'
+            size_hint: 0.65,0.005
+            pos_hint: {'center_x': 0.65, 'center_y': 0.8}
+        TextInput:
+            id: R_user
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {"center_x": 0.5, "center_y": 0.75}
+            hint_text: 'Usuario'
+        #nome completo
+        Label:
+            text:'Nome Completo:'
+            size_hint: None, None
+            size_hint: 0.85,0.005
+            pos_hint: {'center_x:': 0.5, 'center_y': 0.7}
+        Label:
+            id: av_R_Ncompleto
+            text:''
+            color: 'red'
+            size_hint: 0.85,0.005
+            pos_hint: {'center_x': 0.73, 'center_y': 0.7}
+        TextInput:
+            id: R_Ncompleto
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {"center_x": 0.5, "center_y": 0.65}
+            hint_text: 'Nome Completo'
+        #telefone
+        Label:
+            text:'N° telefone:'
+            size_hint: None, None
+            size_hint: 0.75,0.005
+            pos_hint: {'center_x:': 0.5, 'center_y': 0.6}
+        Label:
+            id: av_R_telefone
+            text:''
+            color: 'red'
+            size_hint: 0.75,0.005
+            pos_hint: {'center_x': 0.65, 'center_y': 0.6}
+        TextInput:
+            id: R_telefone
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {"center_x": 0.5, "center_y": 0.55}
+            hint_text: 'ex: 71984785356'
+        #Email
+        Label:
+            text:'Email:'
+            size_hint: None, None
+            size_hint: 0.65,0.005
+            pos_hint: {'center_x:': 0.5, 'center_y': 0.5}
+        Label:
+            id: av_R_email
+            text:''
+            color: 'red'
+            size_hint: 0.65,0.005
+            pos_hint: {'center_x': 0.65, 'center_y': 0.5}
+        TextInput:
+            id: R_email
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            hint_text: 'ex: exemplo@gmail.com'
+        #senha
+        Label:
+            text:'Senha:'
+            size_hint: None, None
+            size_hint: 0.65,0.005
+            pos_hint: {'center_x:': 0.5, 'center_y': 0.4}
+        Label:
+            id: av_R_senha
+            text:''
+            color: 'red'
+            size_hint: 0.65,0.005
+            pos_hint: {'center_x': 0.65, 'center_y': 0.4}
+        TextInput:
+            id: R_senha
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {"center_x": 0.5, "center_y": 0.35}
+            hint_text: 'Senha'
+        #pin
+        Label:
+            text:'PIN:'
+            size_hint: None, None
+            size_hint: 0.6,0.005
+            pos_hint: {'center_x:': 0.5, 'center_y': 0.3}
+        Label:
+            id: av_R_pin
+            text:''
+            color: 'red'
+            size_hint: 0.6,0.005
+            pos_hint: {'center_x': 0.65, 'center_y': 0.3}
+        TextInput:
+            id: R_pin
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {"center_x": 0.5, "center_y": 0.25}
+            hint_text: 'ex: 1234'
+
+
+        #Voltar-Continuar
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint: None, None
+            size_hint: 0.5,0.05
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+            rows:1
+            couls: 2
+            #botao volta tela de login
+            Button:
+                id: bt_back
+                text:'Voltar'
+                color: 'yellow'
+                background_color: 'blue'
+                on_press: root.Back_Login()
+
+            #botao continuar cadastro
+            Button:
+                id: bt_continue
+                text:'Continuar'
+                color: 'yellow'
+                background_color: 'green'
+                on_press: root.bt_R_continuar()
+        
+        
 
          
