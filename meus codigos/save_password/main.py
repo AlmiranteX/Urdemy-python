@@ -110,14 +110,20 @@ def registro(inputs, avisos, bt):
             _Boolean_: _Retorna True ou False dentro da variavel solicitada dentro da função dados()_
         """
         
-        campo.text = campo.text.strip()
+        #exceçao Nome completo
+        if campo != inputs['R_Ncompleto']:
+            campo.text = campo.text.strip()
+        else:
+            campo.text = campo.text.lstrip()
+            
         texto = campo.text.lower()
         menor = len(texto) > qt_carct[0]
         maior = len(texto) <= qt_carct[1]
         
         #excesão para o textinput email
         if campo == inputs['R_email']:
-            if '@gmail.com' in texto:
+        
+            if texto[-10:] =='@gmail.com':
                 pass
             else:
                 inputs['R_email'].background_color= 'ffbdbd'
@@ -125,7 +131,6 @@ def registro(inputs, avisos, bt):
                 bt.disabled = True
                 return False
         #................................._Fim_excesões_
-        
         
         if menor and maior:
             n=0
@@ -140,7 +145,15 @@ def registro(inputs, avisos, bt):
                 #controlar uso de espaços
                 elif caractere == ' ':
                     n+=1
-                    if n > 2:
+                    if n > 2 and campo != inputs['R_Ncompleto']:
+                        aviso.text = 'Invalide!'
+                        campo.background_color = 'ffbdbd'
+                        bt.disabled = True
+                        n=0
+                        return False
+                    #excesão Nome completo
+                    elif n > 3 and campo == inputs['R_Ncompleto']:
+                        campo.text = campo.text.rstrip()
                         aviso.text = 'Invalide!'
                         campo.background_color = 'ffbdbd'
                         bt.disabled = True
@@ -148,14 +161,9 @@ def registro(inputs, avisos, bt):
                         return False
                 else:
                     continue
-
-            
-            
-                    
+                      
             campo.background_color = 255, 255, 255, 255
             none_av(aviso, t=0)
-            
-            
             
             return True
         
@@ -182,7 +190,7 @@ def registro(inputs, avisos, bt):
         Nome_completo = yes_no(
             campo=inputs['R_Ncompleto'],
             aviso=avisos['av_R_Ncompleto'],
-            qt_carct=(13, 35),
+            qt_carct=(13, 60),
             yes='abcdefghijklmnopqrstuvwxyz '
             )
         telefone = yes_no(
