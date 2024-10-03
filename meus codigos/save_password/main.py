@@ -8,6 +8,7 @@ import random, os
 Config.set('graphics', 'width', '320')
 Config.set('graphics', 'heigth', '480')
 
+#baco de daods provisorio
 contas = {
     'jonatas': {
         'senha': '19972024',
@@ -26,13 +27,18 @@ contas = {
         'cidade': 'salvador',
     },
     }
+
+
 #zera avisos
 def none_av(av, t):
     """_summary_
     Args:
-        av (indereço 'Label'): aviso que quero ocultar
-        t (Number):  tempo para esperar pra chama a funcao zera
+        av: (indereço 'Label'): aviso que quero ocultar
+        t: (Number):  tempo de esperar pra chama a funcao zera
+    Function:
+        chama a funçao zera() para Define valor '' a um elemento (av) apos um certo intervalo (t) 
     """
+    
     def zera(dt):
         av.text=''
     Clock.schedule_once(zera,t)
@@ -50,8 +56,8 @@ def login(L, S, contas, av_u, av_s):
         av_s (_indereço label_): _aviso de senha (self.ids.aviso_senha) na tela (Screen_Login)_
         
     Returns:
-        _Boolean_: _Retorna 'True' se Usuario digitado Existir no dict(contas)_
-        _Boolean_: _Retorna 'False' se Usuario digitado Não existir ou a senha estiver 
+        _Boolean_: _Retorna 'True' se Usuario digitado Existir no banco de dados (Users)_
+        _Boolean_: _Retorna 'False' se Usuario digitado Não existir ou a senha estiver errada_
     
     Funçãos:
         _Avisa com testo caso usuario não existir ou a senha estiver errada_
@@ -73,9 +79,36 @@ def login(L, S, contas, av_u, av_s):
         none_av(av_u, t=2)
         return False
 
-def registro(inputs, avisos):
-    #teste compatibilidade
+#verificar dados de registro
+def registro(inputs, avisos, bt):
+    """_summary_
+
+    Args:
+        inputs (_dict_): _Dicionario com elementos Textinputs da tela (screen_registre)_
+        avisos (_dict_): _Dicionario com elementos Label da tela (screen_registre)_
+        bt (_indereço button_): _Elemento Button (Continuar) da tela (screen_registre)_
+
+    Returns:
+        _Boolean_:  Retorna a Função dados() com valor True ou False 
+    
+    Funçãos:
+        _Retorna a função dados() que trabalhar chamando a funcão yes_no()
+    """
+    
+    #teste de dados permitiveis
     def yes_no(campo, aviso, qt_carct, yes):
+        """_summary_
+
+        Args:
+            campo (_indereço Textinput_): _Indereço do elemento Textinput da tela (screen_registre)_
+            aviso (_indereço Label_): _Indereço do elemento Label (usado para aviso sobre o campo) da tela (screen_registre)_
+            qt_carct (_Tuple_): _Tuple com 2 valores, 1°valor para quantidade minima, 2°valor para quantidade maxima\
+                para controlar quantidade de strings dentro do Textinput da tela (screen_registre)_
+            yes (_Strings_): _Strings com caracteres permitidos usar no Textinput determinado da tela (screen_registre)_
+
+        Returns:
+            _Boolean_: _Retorna True ou False dentro da variavel solicitada dentro da função dados()_
+        """
         
         campo.text = campo.text.strip()
         texto = campo.text.lower()
@@ -86,10 +119,11 @@ def registro(inputs, avisos):
             n=0
             
             for caractere in texto:
+                
                 if caractere not in yes:
                     aviso.text = 'Invalide!'
                     campo.background_color = 'ffbdbd'
-                    none_av(aviso, t=3)
+                    bt.disabled = True
                     return False
                 #controlar uso de espaços
                 elif caractere == ' ':
@@ -97,21 +131,31 @@ def registro(inputs, avisos):
                     if n > 2:
                         aviso.text = 'Invalide!'
                         campo.background_color = 'ffbdbd'
-                        none_av(aviso, t=3)
+                        bt.disabled = True
                         n=0
                         return False
                 else:
                     continue
+               
             campo.background_color = 255, 255, 255, 255
+            none_av(aviso, t=0)
+            
             return True
         
         else:
             aviso.text = 'Invalide!'
             campo.background_color = 'ffbdbd'
-            none_av(aviso, t=3)
-    
+            bt.disabled = True
+            
     #chama yes_no() passando o campo e valores   
-    def dados():       
+    def dados():
+        """_summary_
+
+        Returns:
+            _Boolean_: _True ou False_
+        Função:
+            _Verificar se os dados inserito no compo textinput da tela (screen_registre) pelo usuario e validos _
+        """
         usuario = yes_no(
             campo=inputs['R_user'],
             aviso=avisos['av_R_user'],
@@ -134,7 +178,7 @@ def registro(inputs, avisos):
             campo=inputs['R_email'],
             aviso=avisos['av_R_email'],
             qt_carct=(13, 50),
-            yes='abcdefghijklmnopqrstuvwxyz@.-_&0123456789'
+            yes="abcdefghijklmnopqrstuvwxyz@.-_&0123456789"
             )
         senha = yes_no(
             campo=inputs['R_senha'],
@@ -148,8 +192,19 @@ def registro(inputs, avisos):
             qt_carct=(3, 4),
             yes='0123456789'
             )
-    
+
+        if usuario and Nome_completo:
+            if telefone and email:
+                if '@gmail.com' in inputs['R_email'].text:
+                    if senha and pin:
+                        bt.disabled = False
+                        return True
+                else:
+                    inputs['R_email'].background_color= 'ffbdbd'
+                    avisos['av_R_email'].text = 'Invalide!'
+                    
     return dados()
+    
 
 class Screen_Login(Screen):
      #Entrar:
@@ -165,18 +220,17 @@ class Screen_Login(Screen):
             contas=contas,
             av_u=aviso_user,
             av_s=aviso_senha,
-            
+
             )    
     
     def bt_registrar(self):
         self.manager.current = 'Screen_Registre'
         
+        
 class Screen_Registre(Screen):
-    
-    def Back_Login(self):
-        self.manager.current = 'Screen_Login'
-    #Enviar cadastro
-    def bt_R_continuar(self):
+
+    #Inicio tela cadastro
+    def on_enter(self):
         #TextsInputs
         R_Inputs = {
             'R_user': self.ids.R_user,
@@ -195,8 +249,20 @@ class Screen_Registre(Screen):
             'av_R_senha': self.ids.av_R_senha,
             'av_R_pin': self.ids.av_R_pin,
         }
-        registro(inputs=R_Inputs, avisos=R_av)
+        R_bt_continue = self.ids.bt_continue
         
+        def chama_cadastro(dt):
+           return registro(inputs=R_Inputs, avisos=R_av, bt=R_bt_continue)
+        
+        Clock.schedule_interval(chama_cadastro, 0.5)
+        
+        
+    def Back_Login(self):
+        self.manager.current = 'Screen_Login'
+    #Enviar cadastro
+    def bt_R_continuar(self):
+       ...
+    
        
                
 class GerenciadorDeTelas(ScreenManager):
