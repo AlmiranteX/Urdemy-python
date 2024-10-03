@@ -115,6 +115,18 @@ def registro(inputs, avisos, bt):
         menor = len(texto) > qt_carct[0]
         maior = len(texto) <= qt_carct[1]
         
+        #excesão para o textinput email
+        if campo == inputs['R_email']:
+            if '@gmail.com' in texto:
+                pass
+            else:
+                inputs['R_email'].background_color= 'ffbdbd'
+                avisos['av_R_email'].text = 'Invalide!'
+                bt.disabled = True
+                return False
+        #................................._Fim_excesões_
+        
+        
         if menor and maior:
             n=0
             
@@ -136,9 +148,14 @@ def registro(inputs, avisos, bt):
                         return False
                 else:
                     continue
-               
+
+            
+            
+                    
             campo.background_color = 255, 255, 255, 255
             none_av(aviso, t=0)
+            
+            
             
             return True
         
@@ -195,13 +212,10 @@ def registro(inputs, avisos, bt):
 
         if usuario and Nome_completo:
             if telefone and email:
-                if '@gmail.com' in inputs['R_email'].text:
-                    if senha and pin:
-                        bt.disabled = False
-                        return True
-                else:
-                    inputs['R_email'].background_color= 'ffbdbd'
-                    avisos['av_R_email'].text = 'Invalide!'
+                if senha and pin:
+                    bt.disabled = False
+                    return True
+                
                     
     return dados()
     
@@ -253,7 +267,6 @@ class Screen_Registre(Screen):
         
         def chama_cadastro(dt):
            return registro(inputs=R_Inputs, avisos=R_av, bt=R_bt_continue)
-        
         Clock.schedule_interval(chama_cadastro, 0.5)
         
         
