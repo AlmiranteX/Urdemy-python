@@ -2,33 +2,18 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.config import Config
 from kivy.clock import Clock
+import requests, json
 import random, os
+
 
 # Define o tamanho da janela antes de carregar o App
 Config.set('graphics', 'width', '320')
 Config.set('graphics', 'heigth', '480')
 
-#baco de daods provisorio
-contas = {
-    'jonatas': {
-        'senha': '19972024',
-        'sexo': 'M',
-        'idade': 27,
-        'contato': '71984785356',
-        'email': 'araujojonatasapc152018@gmail.com',
-        'cidade': 'salvador',
-    },
-    'jennifer': {
-        'senha': '20042024',
-        'sexo': 'f',
-        'idade': 20,
-        'contato': '71983714620',
-        'email': 'jennifeesantos062@gmail.com',
-        'cidade': 'salvador',
-    },
-    }
+#baco de dados
+banco_dados= ('https://dia-de-pix-default-rtdb.firebaseio.com/usuarios.json')
 
-
+   
 #zera avisos
 def none_av(av, t):
     """_summary_
@@ -229,17 +214,29 @@ def registro(inputs, avisos, bt):
     
 
 class Screen_Login(Screen):
-     #Entrar:
+    #Entrar:
+    def on_enter(self):
+        os.system('cls')
+    
+        
     def bt_enter(self):
         usuario = self.ids.user
         senha = self.ids.password
         aviso_user = self.ids.aviso_user
         aviso_senha = self.ids.aviso_senha
-               
+        
+        user= requests.get(banco_dados)
+        conta= user.json()
+        users={}
+        for k, v in conta.items():
+            users[k]={'senha': v['senha']}
+        print(users)
+
+         
         login(
             L=usuario.text.lower(),
             S=senha.text.lower(),
-            contas=contas,
+            contas=users,
             av_u=aviso_user,
             av_s=aviso_senha,
 
@@ -250,9 +247,13 @@ class Screen_Login(Screen):
         
         
 class Screen_Registre(Screen):
+    
+
 
     #Inicio tela cadastro
     def on_enter(self):
+        os.system('cls')
+        
         #TextsInputs
         R_Inputs = {
             'R_user': self.ids.R_user,
@@ -282,7 +283,29 @@ class Screen_Registre(Screen):
         self.manager.current = 'Screen_Login'
     #Enviar cadastro
     def bt_R_continuar(self):
-       ...
+        #TextsInputs
+        R_Inputs = {
+            'R_user': self.ids.R_user.text.lower(),
+            'R_Ncompleto': self.ids.R_Ncompleto.text.lower(),
+            'R_telefone': self.ids.R_telefone.text.lower(),
+            'R_email': self.ids.R_email.text.lower(),
+            'R_senha': self.ids.R_senha.text.lower(),
+            'R_pin': self.ids.R_pin.text.lower(),
+        }
+        novo_user = {
+            'nome completo': R_Inputs['R_Ncompleto'],
+            'telefone': R_Inputs['R_telefone'],
+            'email': R_Inputs['R_email'],
+            'senha': R_Inputs['R_senha'],
+            'pin': R_Inputs['R_pin']  
+        }
+        
+        nova_chave = R_Inputs['R_user']
+        url_nova = f'https://dia-de-pix-default-rtdb.firebaseio.com/usuarios/{nova_chave}.json'
+        
+        # Fazer uma requisição PUT para inserir os dados com a nova chave
+        response = requests.put(url_nova, json=novo_user)
+        
     
        
                
