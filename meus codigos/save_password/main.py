@@ -65,7 +65,7 @@ def login(L, S, contas, av_u, av_s):
         return False
 
 #verificar dados de registro
-def registro(inputs, avisos, bt):
+def registro(inputs, avisos, bt, bc):
     """_summary_
 
     Args:
@@ -79,7 +79,31 @@ def registro(inputs, avisos, bt):
     Funçãos:
         _Retorna a função dados() que trabalhar chamando a funcão yes_no()
     """
-    
+    def verify_flags():
+
+            if inputs['R_user'].text.lower() in bc['usuarios']:
+                inputs['R_user'].background_color='ffbdbd'
+                avisos['av_R_user'].text = 'Em uso!'
+                bt.disabled = True
+                return False
+            if inputs['R_Ncompleto'].text.lower() in bc['Ncompletos']:
+                inputs['R_Ncompleto'].background_color='ffbdbd'
+                avisos['av_R_Ncompleto'].text = 'Em uso!'
+                bt.disabled = True
+                return False
+            if inputs['R_email'].text.lower() in bc['emails']:
+                inputs['R_email'].background_color='ffbdbd'
+                avisos['av_R_email'].text = 'Em uso!'
+                bt.disabled = True
+                return False
+            if inputs['R_telefone'].text.lower() in bc['telefones']:
+                inputs['R_telefone'].background_color='ffbdbd'
+                avisos['av_R_telefone'].text = 'Em uso!'
+                bt.disabled = True
+                return False
+            
+            return True
+       
     #teste de dados permitiveis
     def yes_no(campo, aviso, qt_carct, yes):
         """_summary_
@@ -146,12 +170,12 @@ def registro(inputs, avisos, bt):
                         return False
                 else:
                     continue
-                      
-            campo.background_color = 255, 255, 255, 255
-            none_av(aviso, t=0)
-            
-            return True
-        
+            if verify_flags():   
+                campo.background_color = 255, 255, 255, 255
+                none_av(aviso, t=0)
+                return True
+            else:
+                return False
         else:
             aviso.text = 'Invalide!'
             campo.background_color = 'ffbdbd'
@@ -208,6 +232,8 @@ def registro(inputs, avisos, bt):
                 if senha and pin:
                     bt.disabled = False
                     return True
+                   
+                    
                 
                     
     return dados()
@@ -244,16 +270,15 @@ class Screen_Login(Screen):
     
     def bt_registrar(self):
         self.manager.current = 'Screen_Registre'
-        
-        
+    
+            
 class Screen_Registre(Screen):
     
-
-
+        
     #Inicio tela cadastro
     def on_enter(self):
         os.system('cls')
-        
+        banco = {}
         #TextsInputs
         R_Inputs = {
             'R_user': self.ids.R_user,
@@ -274,8 +299,18 @@ class Screen_Registre(Screen):
         }
         R_bt_continue = self.ids.bt_continue
         
+        #get usuarios dados       
+        usuarios = requests.get('https://dia-de-pix-default-rtdb.firebaseio.com/dados/usuarios.json')
+        banco['usuarios'] = usuarios.json()
+        Ncompletos = requests.get('https://dia-de-pix-default-rtdb.firebaseio.com/dados/Ncompletos.json')
+        banco['Ncompletos']= Ncompletos.json() 
+        telefones = requests.get('https://dia-de-pix-default-rtdb.firebaseio.com/dados/telefones.json')
+        banco['telefones'] = telefones.json()
+        emails = requests.get('https://dia-de-pix-default-rtdb.firebaseio.com/dados/emails.json')
+        banco['emails']= emails.json()
+        
         def chama_cadastro(dt):
-           return registro(inputs=R_Inputs, avisos=R_av, bt=R_bt_continue)
+           return registro(inputs=R_Inputs, avisos=R_av, bt=R_bt_continue, bc=banco)
         Clock.schedule_interval(chama_cadastro, 0.5)
         
         
@@ -299,16 +334,72 @@ class Screen_Registre(Screen):
             'senha': R_Inputs['R_senha'],
             'pin': R_Inputs['R_pin']  
         }
+                      
+        def send_dados():
+            """_summary_
+                Função:
+                    Chava a função enviar_dados() para enviar o cadastro pra o banco de dados,
+                    passa os dados nercessarios como argumentos (chave/valor/indereço)
+            """
+            def enviar_dados(chave, valor, cep):
+                """_summary_
+
+                Args:
+                    chave (_chave do valor a ser armazendado_): _chave de acesso do valor ex: chave = 'jonatas': 'valor'_
+                    valor (_valor para ser armazendado na chave_): _valor a ser armazendado ex: 'chave': valor= 'araujo'_
+                    cep (_indereço de um dicionario no firebase Realtime_Database_): _'dados/usuarios'_
+                Função:
+                    Recebe os dados indereço/chave nos paramentros para enviar o valor para o banco de dados 
+                """
+                #condiçao para email
+                if '@gmail.com' in chave:
+                    chave = chave.removesuffix('@gmail.com')
+                                   
+                url = f'https://dia-de-pix-default-rtdb.firebaseio.com/{cep}/{chave}.json'
+                response = requests.put(url, json=valor)
+                return response.status_code
+            
+            #Criar usuario
+            enviar_dados(
+                R_Inputs['R_user'],
+                novo_user,
+                'usuarios'
+                )
+            #Criar dados do usuario
+            cont = requests.get('https://dia-de-pix-default-rtdb.firebaseio.com/usuarios.json')
+            cont = len(cont.json())
+            
+            #---usuarios
+            enviar_dados(
+                R_Inputs['R_user'],
+                cont,
+                'dados/usuarios'
+                )
+            #---Ncompletos
+            enviar_dados(
+                R_Inputs['R_Ncompleto'],
+                R_Inputs['R_user'],
+                'dados/Ncompletos'
+            )
+            #---emails
+            enviar_dados(
+                R_Inputs['R_email'],
+                R_Inputs['R_user'],
+                'dados/emails'
+            )
+            #---telefones
+            enviar_dados(
+                R_Inputs['R_telefone'],
+                R_Inputs['R_user'],
+                'dados/telefones'
+            )
+
+            return True
         
-        nova_chave = R_Inputs['R_user']
-        url_nova = f'https://dia-de-pix-default-rtdb.firebaseio.com/usuarios/{nova_chave}.json'
-        
-        # Fazer uma requisição PUT para inserir os dados com a nova chave
-        response = requests.put(url_nova, json=novo_user)
-        
-    
-       
-               
+        resposta = send_dados()
+        if resposta:
+            self.manager.current = 'Screen_Login'
+            
 class GerenciadorDeTelas(ScreenManager):
     pass
 
