@@ -13,7 +13,6 @@ Config.set('graphics', 'heigth', '480')
 #baco de dados
 banco_dados= ('https://dia-de-pix-default-rtdb.firebaseio.com/usuarios.json')
 
-   
 #zera avisos
 def none_av(av, t):
     """_summary_
@@ -28,7 +27,6 @@ def none_av(av, t):
         av.text=''
     Clock.schedule_once(zera,t)
 
- 
 #Tentar Login
 def login(L, S, contas, av_u, av_s):
     """_summary_
@@ -238,7 +236,6 @@ def registro(inputs, avisos, bt, bc):
                     
     return dados()
     
-
 class Screen_Login(Screen):
     #Entrar:
     def on_enter(self):
@@ -270,7 +267,6 @@ class Screen_Login(Screen):
     
     def bt_registrar(self):
         self.manager.current = 'Screen_Registre'
-    
             
 class Screen_Registre(Screen):
     
@@ -410,5 +406,3 @@ class Save_App(App):
 # Run the application
 if __name__ == "__main__":
     Save_App().run()
-
-
