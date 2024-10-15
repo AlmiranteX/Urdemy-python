@@ -2,7 +2,6 @@
 """
 import os
 
-
 titulo = 'Aprenda como devem ser pronunciadas o alfabeto da língua inglesa:'
 
 alphabet = 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', \
@@ -30,10 +29,6 @@ def menu(f, t, w, l, h):
     for i in h:
         print(i)
     
-    
-    
-    
-
 def quest_alphabet(alpha, speak, f, t):
     win, loss = 0, 0
     lossed = []
@@ -56,10 +51,7 @@ def quest_alphabet(alpha, speak, f, t):
         lossed.append(f'{alpha[i]} = {speak[i]} - {L} é ({(L==speak[i])}) ')
         i+=1
         print(lossed)
-            
-        
-        
-                      
+                              
 quest_alphabet(\
     alpha=alphabet, speak=speak_aphabet, \
     t=titulo, f=fonologia
