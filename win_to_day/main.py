@@ -7,7 +7,7 @@ client = us.User(
     phone='71984785356',
     email='jonatasaraujox9@gmail.com',
     age='27',
-    password='admin13'
+    password='admin123'
     )
 
 logar = client.login()
