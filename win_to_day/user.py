@@ -1,3 +1,6 @@
+import requests, json
+
+link=('https://dia-de-pix-default-rtdb.firebaseio.com')
 
 class User:
     def __init__(self, **atributos):
@@ -7,19 +10,19 @@ class User:
         self.phone=atributos['phone']
         self.email=atributos['email']
         self.age=atributos['age']
+        self.password=atributos['password']
     
+    def login(self):
+        id_user = self.user
+        id_password = self.password
+        
+        Users_userds = requests.get(f'{link}/dados/usuarios.json').json()
+        
+        if id_user in Users_userds.keys():
+            password=requests.get(f'{link}/usuarios/{id_user}/senha.json').json()
 
-
-
-
-
-client = User(
-    user='almirante',
-    name='jonatas',
-    last_name='araujo de aquino',
-    phone='71984785356',
-    email='jonatasaraujox9@gmail.com',
-    age='27'
-    )
-
-print(client.user)
+            if id_password ==  password:
+                return True
+            return False
+        
+        return False
