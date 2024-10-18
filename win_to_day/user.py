@@ -97,14 +97,28 @@ class User:
                             usuarios = usuarios.keys()
                             if self.user not in usuarios:
                                 send()
-                                return True
-            return False
-        verific()
+                                return 'Sucesso no registro...'
+                            return 'conta ja registrada'
+                        return 'Email em uso!'                
+                    return 'Telefone em uso!'
+                return f'{fullname} você ja estar registrado'
+            return 'Usuario em uso!'
+        
+        return verific()
         
     def recuperar_conta(self, email):
+        """_summary_
+
+        Args:
+            email (_string_): _indereço email do usuario_
+
+        Returns:
+            _string_: _retorna string informando status do envio da msg ao email informado pelo usuario_
+        """
         vmail = email.removesuffix('@gmail.com')
         
         usuario = requests.get(f'{LINK}/dados/emails/{vmail}.json').json()
+        #verificar conta associada ao email informado
         if usuario:
             senha = requests.get(f'{LINK}/usuarios/{usuario}/password.json').json()
             
