@@ -1,15 +1,15 @@
 import user as us
 
 client = us.User(
-    user='adm',
+    user='AlmiranteX9',
     name='jonatas',
     last_name='araujo de aquino',
-    phone='71984785356',
+    phone='719847853560',
     email='jonatasaraujox9@gmail.com',
     age='27',
-    password='admin123'
+    password='Jts.1709'
     )
 
-logar = client.login()
+logar = client.recuperar_conta(email='jonatasaraujox9@gmail.com')
 
 print(logar)
