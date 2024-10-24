@@ -1,0 +1,43 @@
+.container {
+    width: 300px;
+    background-color: aqua;
+    
+    h1 {
+        color: blueviolet;
+    }
+    .Numero {
+        width: 50px;
+        background-color: azure;
+    }
+    .btn {
+        background-color: greenyellow;
+        color: crimson;
+        font:15pt arial bold;
+        display: inline;
+        border-radius: 50%;
+        width: 80px; height: 80px;
+       
+        
+    }
+    .btn_stop {
+        background-color: rgb(230, 18, 18);
+        color: rgb(238, 241, 6);
+        font:bold;
+        display: none;
+        border-radius: 50%;
+        width: 60px; height: 60px;
+    }
+    .sav_edit {
+        background-color: rgb(238, 241, 6);
+
+    }
+    
+}
+
+body {
+    background-color: beige;
+    background-image:image-set("icon.png");
+
+
+    
+}

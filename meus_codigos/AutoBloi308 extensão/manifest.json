@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "AutoBloi308",
+    "description": "AutoBloi308 é uma ferramenta para auto participar dos sorteios do site Bloi308",
+    "version": "1.0",
+    "action": {
+      "default_popup": "poup.html",
+      "default_title": "Clique aqui"
+    },
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }],
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
+  
