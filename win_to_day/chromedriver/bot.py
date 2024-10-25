@@ -6,6 +6,15 @@ from selenium.webdriver.support import expected_conditions as EC
 import os, time, json
 from pathlib import Path
 
+def ler():
+    path = Path('Numeros.json') 
+    #lendo arquivo
+    numero = path.read_text()
+    num = json.loads(numero)
+    num["status"] = "Esperando_Historico"
+    return num
+
+
 # Inicializa o WebDriver usando o Selenium Manager (compatível com o navegador Chrome, Firefox ou Edge)
 driver = webdriver.Chrome()  # Selenium Manager lida com o download do driver
 
@@ -35,13 +44,15 @@ def localizar():
     print('Achei iframe 1')
 
 def login():
-    
-    user = driver.find_element(By.NAME, "username")
-    user.send_keys("araujojonatasapc152018@gmail.com")
-    senha = driver.find_element(By.NAME, "password")
-    senha.send_keys("Jts.170922")
-    senha.send_keys(Keys.ENTER)
-    
+    try:
+        print('tentando Login..')
+        user = driver.find_element(By.NAME, "username")
+        user.send_keys("araujojonatasapc152018@gmail.com")
+        senha = driver.find_element(By.NAME, "password")
+        senha.send_keys("Jts.170922")
+        senha.send_keys(Keys.ENTER)
+    except Exception as e:
+        print(f'Falha No Login\n\ttipo do Erro: {e}')
     localizar()
 
 def navegar(url):
@@ -57,15 +68,7 @@ def  verificar(url):
         navegar(url)
       
 def arquivo(n):
-    path = Path('Numeros.json')
-    
-    def ler():
-        #lendo arquivo
-        numero = path.read_text()
-        num = json.loads(numero)
-        num["status"] = "Esperando_Historico"
-        return num
-      
+    path = Path('Numeros.json') 
     def salvar():
         #armazenar numero
         if ler()["listaN"] != n:
@@ -90,7 +93,6 @@ try:
         try:
             
             numero = Historico()  
-        
             arquivo(n=numero)
         
         except:
