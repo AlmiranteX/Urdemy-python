@@ -23,7 +23,7 @@ def ler(path):
         print(chave, valor)
     
 def escrever_ler_json():
-    listar = {'name':'jonatas', 'last':'araujo', 'ultimo':'aquino'}
+    listar = {'name':'jonatas', 'last':'araujo', 'de':'aquino'}
     
     path = Path('win_to_day\chromedriver\memory.json')
     content = json.dumps(listar)
