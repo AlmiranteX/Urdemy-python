@@ -7,15 +7,22 @@ import os, time, json
 from pathlib import Path
 
 def ler():
-    path = Path('Numeros.json') 
+    path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json') 
     #lendo arquivo
     numero = path.read_text()
     num = json.loads(numero)
     num["status"] = "Esperando_Historico"
     return num
 
-def status():
-    ...
+def status(stt):
+    #lendo o dicionario Numeros.json
+    dicionario = ler()
+    dicionario["status"] = stt
+    
+    #atualizando o dicionario
+    path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json')
+    content = json.dumps(dicionario)
+    path.write_text(content) 
     
 # Inicializa o WebDriver usando o Selenium Manager (compatível com o navegador Chrome, Firefox ou Edge)
 driver = webdriver.Chrome()  # Selenium Manager lida com o download do driver
@@ -36,29 +43,30 @@ def localizar():
     WebDriverWait(driver, 20).until(
         EC.frame_to_be_available_and_switch_to_it(driver.find_element(By.XPATH, "/html/body/div[1]/div[3]/div[1]/div[1]/div/iframe"))
     )
-    os.system('cls')
-    print('Achei iframe 0')
+    status('Coletando o (iframe 0)')
     
     # Alterna para o primeiro iframe pelo índice (exemplo: primeiro iframe)
     WebDriverWait(driver, 20).until(
         EC.frame_to_be_available_and_switch_to_it(driver.find_element(By.XPATH, "/html/body/div[2]/div/div[1]/div/iframe"))
     )
-    print('Achei iframe 1')
+    status('Coletando o (iframe 1)')
 
 def login():
     try:
-        print('tentando Login..')
+        conta = ler()
+        status('Fazendo Login...')
         user = driver.find_element(By.NAME, "username")
-        user.send_keys("araujojonatasapc152018@gmail.com")
+        user.send_keys(conta["user"])
         senha = driver.find_element(By.NAME, "password")
-        senha.send_keys("Jts.170922")
+        senha.send_keys(conta["senha"])
         senha.send_keys(Keys.ENTER)
     except Exception as e:
-        print(f'Falha No Login\n\ttipo do Erro: {e}')
+        status('Falha No Login!', e)
     localizar()
 
 def navegar(url):
     # Acessa o Google
+    status('Acessando o site...')
     driver.get(url)
     # Localiza o campo de pesquisa, insere o termo e pressiona Enter
     driver.implicitly_wait(20)
@@ -67,12 +75,13 @@ def navegar(url):
 def  verificar(url):
     url_atual = driver.current_url
     if url_atual != url:
+        status('Reiniciando...')
         navegar(url)
       
 def arquivo(n):
-    path = Path('Numeros.json') 
+    path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json') 
     def salvar():
-        #armazenar numero
+        #armazenar dicionario Numeros.json
         if ler()["listaN"] != n:
             num = ler()
             num["listaN"] = n
@@ -80,8 +89,7 @@ def arquivo(n):
             
             content = json.dumps(num)
             path.write_text(content)
-            os.system('cls')
-            print(f'{n}...Armazenado..')
+        
         
     salvar()
         
@@ -96,10 +104,13 @@ try:
             
             numero = Historico()  
             arquivo(n=numero)
+            os.system('cls')
+            print(numero)
         
         except:
             os.system('cls')
-            print('Esperando Historico...')
+            print('Esperando (Historico)...')
+            status('Esperando (Historico)..')
         
 finally:
     pass   
