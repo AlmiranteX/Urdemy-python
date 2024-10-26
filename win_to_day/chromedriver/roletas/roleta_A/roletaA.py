@@ -21,13 +21,14 @@ def status(stt):
     
     #atualizando o dicionario
     path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json')
-    content = json.dumps(dicionario)
+    content = json.dumps(dicionario, indent=4, ensure_ascii=False)
     path.write_text(content) 
     
 # Inicializa o WebDriver usando o Selenium Manager (compatível com o navegador Chrome, Firefox ou Edge)
 driver = webdriver.Chrome()  # Selenium Manager lida com o download do driver
 
 def Historico():
+    
     def first():
         elemento = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "/html/body/div[2]/div[2]/div[1]/div[8]/div[2]/div[3]/div/div[1]/div"))
@@ -61,7 +62,9 @@ def login():
         senha.send_keys(conta["senha"])
         senha.send_keys(Keys.ENTER)
     except Exception as e:
-        status('Falha No Login!', e)
+        status('Falha No Login!')
+        
+        
     localizar()
 
 def navegar(url):
@@ -86,13 +89,15 @@ def arquivo(n):
             num = ler()
             num["listaN"] = n
             num["status"] = "ON"
+            num["meta"] += 1
             
-            content = json.dumps(num)
+            content = json.dumps(num, indent=4, ensure_ascii=False)
             path.write_text(content)
         
         
     salvar()
-        
+    
+      
 try:
     
     link = "https://www.playpix.com/pb/live-casino/home/-1/All?openGames=40003094-real&gameNames=Roulette%20A"
@@ -100,17 +105,27 @@ try:
     
     while True:
         verificar(link)
+        
         try:
             
             numero = Historico()  
             arquivo(n=numero)
             os.system('cls')
             print(numero)
-        
+            rl=0
+           
         except:
             os.system('cls')
             print('Esperando (Historico)...')
             status('Esperando (Historico)..')
+            rl+=1
+            print(rl)
+            
+            if rl > 3:
+                print(rl)
+                driver.get(link)
+                localizar()
+                rl=0
         
 finally:
     pass   
