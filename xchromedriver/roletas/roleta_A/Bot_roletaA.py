@@ -5,9 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import os, time, json
 from pathlib import Path
+from selenium.webdriver.chrome.options import Options
+
+
 
 def ler():
-    path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json') 
+    path = Path('xchromedriver/roletas/roleta_A/Numeros.json') 
     #lendo arquivo
     numero = path.read_text()
     num = json.loads(numero)
@@ -20,7 +23,7 @@ def status(stt):
     dicionario["status"] = stt
     
     #atualizando o dicionario
-    path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json')
+    path = Path('xchromedriver/roletas/roleta_A/Numeros.json')
     content = json.dumps(dicionario, indent=4, ensure_ascii=False)
     path.write_text(content) 
     
@@ -68,6 +71,7 @@ def login():
     localizar()
 
 def navegar(url):
+    
     # Acessa o Google
     status('Acessando o site...')
     driver.get(url)
@@ -82,7 +86,7 @@ def  verificar(url):
         navegar(url)
       
 def arquivo(n):
-    path = Path('win_to_day/chromedriver/roletas/roleta_A/Numeros.json') 
+    path = Path('xchromedriver/roletas/roleta_A/Numeros.json') 
     def salvar():
         #armazenar dicionario Numeros.json
         if ler()["listaN"] != n:
@@ -97,7 +101,7 @@ def arquivo(n):
         
     salvar()
     
-      
+rl=0    
 try:
     
     link = "https://www.playpix.com/pb/live-casino/home/-1/All?openGames=40003094-real&gameNames=Roulette%20A"
