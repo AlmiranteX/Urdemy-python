@@ -1,0 +1,107 @@
+<GerenciadorDeTelas>:
+    Tela_Login:
+    TelaSecundaria:
+
+<Tela_Login>:
+    name: 'Tela_Login'
+    FloatLayout:
+        Image:
+            source: 'xchromedriver/app/imagens/back_login.jpg'
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: None,None
+            size_hint: 1,1
+
+        Label:
+            text:'Dia de Pix'
+            color: 'yellow'
+            font_size: '35'
+            size_hint: None,None
+            size_hint: 0.5,0.5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+
+        Label:
+            text:'Usuario'
+            font_size: '20'
+            color: 'yellow'
+            size_hint: None,None
+            size_hint: 0.2,0.05
+            pos_hint: {'center_x': 0.5, 'center_y':0.75}
+
+        TextInput:
+            id: username
+            text: ''
+            background_color: (255,255,255,0.8)
+            hint_text: 'Usuario'
+            size_hint: None,None
+            size_hint: 0.3,0.055
+            pos_hint: {'center_x': 0.5, 'center_y':0.7}
+
+        Label:
+            text:'Senha'
+            font_size: '20'
+            color: 'yellow'
+            size_hint: None,None
+            size_hint: 0.2,0.05
+            pos_hint: {'center_x': 0.5, 'center_y':0.6}
+
+        TextInput:
+            id: userpassword
+            text: ''
+            background_color: (255,255,255,0.8)
+            hint_text: 'Senha'
+            size_hint: None,None
+            size_hint: 0.3,0.055
+            pos_hint: {'center_x': 0.5, 'center_y':0.55}
+        Button:
+            text: 'Cadastrar'
+            background_color: (0.8,0,0, 0.8)
+            color: 'yellow'
+            size_hint: None,None
+            size_hint: 0.1,0.03
+            pos_hint: {'center_x': 0.4, 'center_y': 0.5}
+        Button:
+            text: 'Recuperar'
+            background_color: (0.8,0,0,0.8)
+            color: 'yellow'
+            size_hint: None,None
+            size_hint: 0.1,0.03
+            pos_hint: {'center_x': 0.6, 'center_y': 0.5}
+        
+        Button:
+            text: 'Entrar'
+            background_color: (0,255,1, 0.8)
+            color: 'black'
+            font_size: '24'
+            size_hint: None,None
+            size_hint: 0.2,0.08
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            on_release: root.login()
+        Image:
+            id: banne_aviso
+            source: 'xchromedriver/app/imagens/banne_aviso.png'
+            size: (200,40)
+            size_hint: None,None
+            
+            pos_hint: {'center_x':0.5, 'center_y': 0.1}
+        Label:
+            id: aviso_login
+            text: 'Dados Invalidos !'
+            color: 'red'
+            font_size: 14
+            size_hint: None,None
+            size_hint: 0.5,0.05
+            pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+
+
+
+
+
+
+
+
+<TelaSecundaria>:
+    name: 'tela_secundaria'
+    Button:
+        text: 'Fechar Tela Secundária'
+        on_release: root.fechar_tela()
