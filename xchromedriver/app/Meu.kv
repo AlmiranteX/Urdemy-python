@@ -1,0 +1,15 @@
+<GerenciadorDeTelas>:
+    TelaPrincipal:
+    TelaSecundaria:
+
+<TelaPrincipal>:
+    name: 'tela_principal'
+    Button:
+        text: 'Ir para Tela Secundária'
+        on_release: app.root.current = 'tela_secundaria'
+
+<TelaSecundaria>:
+    name: 'tela_secundaria'
+    Button:
+        text: 'Fechar Tela Secundária'
+        on_release: root.fechar_tela()

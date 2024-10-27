@@ -6,12 +6,32 @@ Config.set('graphics', 'resizable', False)  # Desabilita o redimensionamento
 
 from kivy.app import App
 from kivy.uix.screenmanager import Screen, ScreenManager
+#from kivy.lang import Builder
+from user import User
 
+
+# Carrega o arquivo KV
+#Builder.load_file("kv_foot.kv")
 
 class  Tela_Login(Screen):
-    pass
-
-
+    
+    def login(self):
+        #Obter texto nos TextInput de login
+        user = self.ids.username.text
+        password=self.ids.userpassword.text
+        #verificar se dados foram digitados
+        if user and password:
+            user = user.strip()
+            password = password.strip()
+            buscar = User(user=user, password=password, email='')
+            #verificar se usuario existe e fazer login se True
+            if buscar.logar():
+                self.ids.aviso_login.text = 'Sucesso'
+            else:
+                self.ids.aviso_login.text = 'Dados Invalidos'
+                
+                
+                
 class TelaSecundaria(Screen):
     def fechar_tela(self):
         # Aqui você pode chamar o método `current` do ScreenManager para mudar de tela
