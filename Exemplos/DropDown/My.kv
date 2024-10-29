@@ -1,0 +1,40 @@
+<RootWidget>:
+    orientation: 'vertical'
+
+    # Botão que abre o menu
+    Button:
+        text: 'Abrir Menu'
+        on_release: dropdown.open(self)  # Abre o menu ao clicar
+        size_hint_y: None
+        height: 50
+
+        # Define o menu Dropdown como propriedade
+        DropDown:
+            id: dropdown
+
+            # Item 1 do menu
+            Button:
+                text: 'Opção 1'
+                size_hint_y: None
+                height: 40
+                on_release:
+                    dropdown.select('Opção 1')
+                    dropdown.dismiss()
+
+            # Item 2 do menu
+            Button:
+                text: 'Opção 2'
+                size_hint_y: None
+                height: 40
+                on_release:
+                    dropdown.select('Opção 2')
+                    dropdown.dismiss()
+
+            # Item 3 do menu
+            Button:
+                text: 'Opção 3'
+                size_hint_y: None
+                height: 40
+                on_release:
+                    dropdown.select('Opção 3')
+                    dropdown.dismiss()

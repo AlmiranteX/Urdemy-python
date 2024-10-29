@@ -1,107 +1,190 @@
 <GerenciadorDeTelas>:
     Tela_Login:
-    TelaSecundaria:
+    Registro:
+    
+  
 
 <Tela_Login>:
     name: 'Tela_Login'
     FloatLayout:
+        id: fundo
         Image:
+            id: capa  
             source: 'xchromedriver/app/imagens/back_login.jpg'
             allow_stretch: True
             keep_ratio: False
             size_hint: None,None
             size_hint: 1,1
-
         Label:
+            id: diadepix
             text:'Dia de Pix'
             color: 'yellow'
             font_size: '35'
             size_hint: None,None
             size_hint: 0.5,0.5
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-
-        Label:
-            text:'Usuario'
-            font_size: '20'
-            color: 'yellow'
-            size_hint: None,None
-            size_hint: 0.2,0.05
-            pos_hint: {'center_x': 0.5, 'center_y':0.75}
-
-        TextInput:
-            id: username
-            text: ''
-            background_color: (255,255,255,0.8)
-            hint_text: 'Usuario'
-            size_hint: None,None
-            size_hint: 0.3,0.055
-            pos_hint: {'center_x': 0.5, 'center_y':0.7}
-
-        Label:
-            text:'Senha'
-            font_size: '20'
-            color: 'yellow'
-            size_hint: None,None
-            size_hint: 0.2,0.05
-            pos_hint: {'center_x': 0.5, 'center_y':0.6}
-
-        TextInput:
-            id: userpassword
-            text: ''
-            background_color: (255,255,255,0.8)
-            hint_text: 'Senha'
-            size_hint: None,None
-            size_hint: 0.3,0.055
-            pos_hint: {'center_x': 0.5, 'center_y':0.55}
-        Button:
-            text: 'Cadastrar'
-            background_color: (0.8,0,0, 0.8)
-            color: 'yellow'
-            size_hint: None,None
-            size_hint: 0.1,0.03
-            pos_hint: {'center_x': 0.4, 'center_y': 0.5}
-        Button:
-            text: 'Recuperar'
-            background_color: (0.8,0,0,0.8)
-            color: 'yellow'
-            size_hint: None,None
-            size_hint: 0.1,0.03
-            pos_hint: {'center_x': 0.6, 'center_y': 0.5}
-        
-        Button:
-            text: 'Entrar'
-            background_color: (0,255,1, 0.8)
-            color: 'black'
-            font_size: '24'
-            size_hint: None,None
-            size_hint: 0.2,0.08
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            on_release: root.login()
         Image:
             id: banne_aviso
             source: 'xchromedriver/app/imagens/banne_aviso.png'
             size: (200,40)
-            size_hint: None,None
-            
+            opacity: 0  # Define a imagem como invisível
+            size_hint: None,None  
             pos_hint: {'center_x':0.5, 'center_y': 0.1}
         Label:
             id: aviso_login
             text: 'Dados Invalidos !'
             color: 'red'
+            opacity: 0
             font_size: 14
             size_hint: None,None
             size_hint: 0.5,0.05
             pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        FloatLayout:
+            id: lg
+            Label:
+                id: usuario
+                text:'Usuario'
+                font_size: '20'
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.2,0.05
+                pos_hint: {'center_x': 0.5, 'center_y':0.75}
+
+            TextInput:
+                id: username
+                text: ''
+                background_color: (255,255,255,0.8)
+                hint_text: 'Usuario'
+                size_hint: None,None
+                size_hint: 0.3,0.055
+                pos_hint: {'center_x': 0.5, 'center_y':0.7}
+
+            Label:
+                id: senha
+                text:'Senha'
+                font_size: '20'
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.2,0.05
+                pos_hint: {'center_x': 0.5, 'center_y':0.6}
+
+            TextInput:
+                id: userpassword
+                text: ''
+                background_color: (255,255,255,0.8)
+                hint_text: 'Senha'
+                size_hint: None,None
+                size_hint: 0.3,0.055
+                pos_hint: {'center_x': 0.5, 'center_y':0.55}
+            Button:
+                id:btn_cd
+                text: 'Cadastrar'
+                background_color: (0.8,0,0, 0.8)
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.1,0.03
+                pos_hint: {'center_x': 0.4, 'center_y': 0.5}
+                on_release: root.recuper()
+            Button:
+                id: btn_rg
+                text: 'Recuperar'
+                background_color: (0.8,0,0,0.8)
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.1,0.03
+                pos_hint: {'center_x': 0.6, 'center_y': 0.5}
+                
+            
+            Button:
+                id: btn_enter
+                text: 'Entrar'
+                background_color: (0,255,1, 0.8)
+                color: 'black'
+                font_size: '24'
+                size_hint: None,None
+                size_hint: 0.2,0.08
+                pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+                on_release: root.login()
+            
+            
+        FloatLayout:
+            id: rg
+            Label:
+                id: usuarioR
+                text:'Usuario'
+                font_size: '20'
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.2,0.05
+                pos_hint: {'center_x': 0.5, 'center_y':0.75}
+
+            TextInput:
+                id: usernameR
+                text: ''
+                background_color: (255,255,255,0.8)
+                hint_text: 'Usuario'
+                size_hint: None,None
+                size_hint: 0.3,0.055
+                pos_hint: {'center_x': 0.5, 'center_y':0.7}
+
+            Label:
+                id: senhaR
+                text:'Senha'
+                font_size: '20'
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.2,0.05
+                pos_hint: {'center_x': 0.5, 'center_y':0.6}
+
+            TextInput:
+                id: passwordR
+                text: ''
+                background_color: (255,255,255,0.8)
+                hint_text: 'Senha'
+                size_hint: None,None
+                size_hint: 0.3,0.055
+                pos_hint: {'center_x': 0.5, 'center_y':0.55}
+            Label:
+                id: emailR
+                text:'Email'
+                font_size: '20'
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.2,0.05
+                pos_hint: {'center_x': 0.5, 'center_y':0.45}
+
+            TextInput:
+                id: emailR
+                text: ''
+                background_color: (255,255,255,0.8)
+                hint_text: 'Gmail'
+                size_hint: None,None
+                size_hint: 0.3,0.055
+                pos_hint: {'center_x': 0.5, 'center_y':0.4}
+            
+            Button:
+                id: btn_cadastrar
+                text: 'Cadastrar'
+                background_color: (0,255,1, 0.8)
+                color: 'black'
+                font_size: '24'
+                size_hint: None,None
+                size_hint: 0.2,0.08
+                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                on_release: root.back_login()
+            
+           
+        
 
 
 
-
-
-
-
-
-<TelaSecundaria>:
-    name: 'tela_secundaria'
+<Registro>:
+    name: 'Registro'
     Button:
+        size_hint: None, None
+        size_hint: 0.5,0.05
+        pos_hint_y: 0.5
+        pos_hint_x: 0.5
         text: 'Fechar Tela Secundária'
         on_release: root.fechar_tela()
+        

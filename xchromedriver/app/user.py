@@ -22,4 +22,17 @@ class User:
             else:
                 return False
     
-    
+    def verificar(self,name,email):
+        retorno = None
+        names = requests.get(f'{LINK}/usuarios.json').json()
+        emails = requests.get(f'{LINK}/emails.json').json()
+        
+        if name in names.keys():
+            retorno=(f'{name} Indisponivel !')
+            return retorno
+        elif email in emails.keys():
+            retorno=(f'{email}@gmail.com Indisponivel !')
+            return retorno
+        
+        retorno = 'Disponivel'
+        return retorno
