@@ -1,6 +1,6 @@
 <GerenciadorDeTelas>:
     Tela_Login:
-    Registro:
+    Menu_bot:
     
   
 
@@ -26,7 +26,10 @@
         Image:
             id: banne_aviso
             source: 'xchromedriver/app/imagens/banne_aviso.png'
-            size: (200,40)
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1,0.1
+            #size: (200,40)
             opacity: 0  # Define a imagem como invisível
             size_hint: None,None  
             pos_hint: {'center_x':0.5, 'center_y': 0.1}
@@ -84,16 +87,16 @@
                 size_hint: None,None
                 size_hint: 0.1,0.03
                 pos_hint: {'center_x': 0.4, 'center_y': 0.5}
-                on_release: root.recuper()
+                on_release: root.muda_layout()
             Button:
-                id: btn_rg
+                id: btn_rc
                 text: 'Recuperar'
                 background_color: (0.8,0,0,0.8)
                 color: 'yellow'
                 size_hint: None,None
                 size_hint: 0.1,0.03
                 pos_hint: {'center_x': 0.6, 'center_y': 0.5}
-                
+                on_release: root.recupera()
             
             Button:
                 id: btn_enter
@@ -156,12 +159,22 @@
             TextInput:
                 id: emailR
                 text: ''
+                font_size: 12
                 background_color: (255,255,255,0.8)
                 hint_text: 'Gmail'
                 size_hint: None,None
                 size_hint: 0.3,0.055
                 pos_hint: {'center_x': 0.5, 'center_y':0.4}
             
+            Button:
+                text: 'Cancelar'
+                background_color: (1,0,0, 0.8)
+                color: 'black'
+                font_size: '18'
+                size_hint: None,None
+                size_hint: 0.1,0.04
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                on_press: root.muda_layout()
             Button:
                 id: btn_cadastrar
                 text: 'Cadastrar'
@@ -171,15 +184,54 @@
                 size_hint: None,None
                 size_hint: 0.2,0.08
                 pos_hint: {'center_x': 0.5, 'center_y': 0.2}
-                on_release: root.back_login()
+                on_release: root.registro_login()
             
-           
-        
+        FloatLayout:
+            id: rc
+            Label:
+                id: emailC
+                text:'Email'
+                font_size: '20'
+                color: 'yellow'
+                size_hint: None,None
+                size_hint: 0.2,0.05
+                pos_hint: {'center_x': 0.5, 'center_y':0.75}
+
+            TextInput:
+                id: emailC
+                text: ''
+                font_size: 12
+                background_color: (255,255,255,0.8)
+                hint_text: 'Gmail'
+                size_hint: None,None
+                size_hint: 0.3,0.055
+                pos_hint: {'center_x': 0.5, 'center_y':0.7}
+            
+            Button:
+                text: 'Cancelar'
+                background_color: (1,0,0, 0.8)
+                color: 'black'
+                font_size: '18'
+                size_hint: None,None
+                size_hint: 0.1,0.04
+                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                on_press: root.recupera()
+            Button:
+                id: btn_Enviar
+                text: 'Enviar Email'
+                background_color: (0,255,1, 0.8)
+                color: 'black'
+                font_size: '24'
+                size_hint: None,None
+                size_hint: 0.2,0.08
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                on_release: root.envia_conta()
 
 
 
-<Registro>:
-    name: 'Registro'
+
+<Menu_bot>:
+    name: 'Menu_bot'
     Button:
         size_hint: None, None
         size_hint: 0.5,0.05

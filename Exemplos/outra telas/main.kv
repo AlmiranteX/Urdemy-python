@@ -1,0 +1,13 @@
+<MyScreenManager>:
+    MainScreen:
+    OutraTela:
+
+<MainScreen>:
+    name: 'main'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Tela Principal'
+        Button:
+            text: 'Ir para Outra Tela'
+            on_release: root.manager.current = 'outra_tela'
