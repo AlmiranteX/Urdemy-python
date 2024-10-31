@@ -12,29 +12,36 @@
         DropDown:
             id: dropdown
 
-            # Item 1 do menu
-            Button:
+            FloatLayout:
                 text: 'Opção 1'
                 size_hint_y: None
-                height: 40
-                on_release:
-                    dropdown.select('Opção 1')
-                    dropdown.dismiss()
+                size_hint_y: '200'
+                
 
-            # Item 2 do menu
-            Button:
-                text: 'Opção 2'
-                size_hint_y: None
-                height: 40
-                on_release:
-                    dropdown.select('Opção 2')
-                    dropdown.dismiss()
 
-            # Item 3 do menu
-            Button:
-                text: 'Opção 3'
-                size_hint_y: None
-                height: 40
-                on_release:
-                    dropdown.select('Opção 3')
-                    dropdown.dismiss()
+                # Item 1 do menu
+                Button:
+                    text: 'Opção 1'
+                    size_hint_y: None
+                    height: 40
+                    on_release:
+                        dropdown.select('Opção 1')
+                        dropdown.dismiss()
+
+                # Item 2 do menu
+                Button:
+                    text: 'Opção 2'
+                    size_hint_y: None
+                    height: 40
+                    on_release:
+                        dropdown.select('Opção 2')
+                        dropdown.dismiss()
+
+                # Item 3 do menu
+                Button:
+                    text: 'Opção 3'
+                    size_hint_y: None
+                    height: 40
+                    on_release:
+                        dropdown.select('Opção 3')
+                        dropdown.dismiss()

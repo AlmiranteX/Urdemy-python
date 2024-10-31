@@ -11,6 +11,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.clock import Clock
 from user import User, requests
+import sys
 
 
 def internet():
@@ -248,9 +249,23 @@ class  Tela_Login(Screen):
             else:
                 aviso(self, aviso='Sem Rede!')
 class Menu_bot(Screen):
-    def fechar_tela(self):
+    def on_enter(self):
+        self.ids.fundo_bot.remove_widget(self.ids.config) 
+        
+    def config(self):
+        try:
+            if self.ids.config not in self.children:
+                self.ids.fundo_bot.add_widget(self.ids.config)
+        except:
+            try:
+                self.ids.fundo_bot.remove_widget(self.ids.config)
+            except:
+                pass 
+        
+    def deslogar(self):
         # Aqui você pode chamar o método `current` do ScreenManager para mudar de tela
         self.manager.current = 'Tela_Login'
+
 
 class GerenciadorDeTelas(ScreenManager):
     pass
@@ -265,7 +280,6 @@ class kv_footApp(App):
 
 if __name__ == '__main__':
     kv_footApp().run()
-
 
 
 
