@@ -250,9 +250,11 @@ class  Tela_Login(Screen):
                 aviso(self, aviso='Sem Rede!')
 class Menu_bot(Screen):
     def on_enter(self):
-        self.ids.fundo_bot.remove_widget(self.ids.config) 
-        
-    def config(self):
+        self.ids.fundo_bot.remove_widget(self.ids.config)
+        self.ids.fundo_bot.remove_widget(self.ids.estrategia)
+    
+    # open/closed FloatLayout config
+    def config_OC(self):
         try:
             if self.ids.config not in self.children:
                 self.ids.fundo_bot.add_widget(self.ids.config)
@@ -261,7 +263,17 @@ class Menu_bot(Screen):
                 self.ids.fundo_bot.remove_widget(self.ids.config)
             except:
                 pass 
-        
+    # open/closed FloatLayout estrategia
+    def estrategia_OC(self):
+        try:
+            if self.ids.estrategia not in self.children:
+                self.ids.fundo_bot.add_widget(self.ids.estrategia)
+        except:
+            try:
+                self.ids.fundo_bot.remove_widget(self.ids.estrategia)
+            except:
+                pass 
+      
     def deslogar(self):
         # Aqui você pode chamar o método `current` do ScreenManager para mudar de tela
         self.manager.current = 'Tela_Login'
